@@ -1,13 +1,23 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import UseState from './component/UseState'; 
+import ThemeDisplay from './components/UseContext';
+import TaskComponent from './components/Task';
+
+export const ThemeContext = React.createContext();
 
 function App() {
+  const [darkMode, setDarkMode] = useState(true);
+
+  const toggleTheme = () => {
+    setDarkMode((prevMode) => !prevMode);
+  };
+
   return (
-    <div className="App">
-      <UseState />
-    </div>
+    <ThemeContext.Provider value={darkMode}>
+      <button onClick={toggleTheme}>Toggle Theme</button>
+      <ThemeDisplay />
+      <TaskComponent />
+    </ThemeContext.Provider>
   );
 }
 
